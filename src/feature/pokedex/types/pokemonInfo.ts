@@ -88,3 +88,36 @@ export interface NamedAPIResource {
     past_types: PokemonPastType[];
   }
   
+  export const EmptyPokemon: Pokemon = {
+    id: 0,
+    name: "",
+    base_experience: 0,
+    height: 0,
+    is_default: false,
+    order: 0,
+    weight: 0,
+    abilities: [],
+    forms: [],
+    game_indices: [],
+    held_items: [],
+    location_area_encounters: "",
+    moves: [],
+    species: { name: "", url: "" },
+    sprites: {
+      back_default:'',
+      back_female:'',
+      back_shiny:'',
+      back_shiny_female:'',
+      front_default:'',
+      front_female:'',
+      front_shiny:'',//画像URL
+      front_shiny_female:'',
+    },
+    cries: {
+        latest: "",
+        legacy: ""
+    },
+    stats: [],
+    types: [],
+    past_types: []
+};

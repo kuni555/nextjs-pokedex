@@ -63,3 +63,32 @@ export interface NamedAPIResource {
     genera: Genera[];
     varieties: PokemonVariety[];
 }
+
+export const EmptyPokemonSpecies: PokemonSpecies = {
+  id: 0,
+  name: "",
+  order: 0,
+  gender_rate: 0,
+  capture_rate: 0,
+  base_happiness: 0,
+  is_baby: false,
+  is_legendary: false,
+  is_mythical: false,
+  hatch_counter: 0,
+  has_gender_differences: false,
+  forms_switchable: false,
+  growth_rate: { name: "", url: "" },
+  pokedex_numbers: [],
+  egg_groups: [],
+  color: { name: "", url: "" },
+  shape: { name: "", url: "" },
+  evolves_from_species: { name: "", url: "" },
+  evolution_chain: { name: "", url: "" },
+  habitat: null,
+  generation: { name: "", url: "" },
+  names: [],
+  flavor_text_entries: [],
+  form_descriptions: [],
+  genera: [],
+  varieties: []
+};

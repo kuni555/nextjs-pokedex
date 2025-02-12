@@ -1,16 +1,20 @@
 import React from 'react';
 import { Card, CardMedia, CardContent, Typography,  } from '@mui/material';
 import { PokemonCardData } from '../types/pokemonProps';
+import Link from 'next/link';
 
 interface CardListProps {
   cardData:PokemonCardData;
+  pokeId:number;
 }
 
 export  const  CardList:React.FC<CardListProps> = ({
   cardData,
+  pokeId
 }) => {
   return (
           <Card>
+            <Link href={{ pathname: "dex/detail", query: { id:pokeId } }}>
             {/* カードの画像 */}
             <CardMedia
               component="img"
@@ -27,6 +31,7 @@ export  const  CardList:React.FC<CardListProps> = ({
                 objectFit: 'contain',
               }}
             />
+            </Link>
             {/* カードの内容 */}
             <CardContent sx={{width:'100%'}}>
               <Typography gutterBottom variant="h5" component="div">
