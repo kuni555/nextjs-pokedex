@@ -1,11 +1,10 @@
 'use client'
-import { RootState } from "@/redux/store";
 import { Box } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { getPokeData, getPokemonSpecies } from "../api/getPokeData";
 import DetailInfoList, { detailDataProps } from "../component/DetailInfoList";
 import { dittoDescription, dittoId, dittoImageUrl, dittoJaName } from "../constants/ditto";
 import { Pokemon } from "../types/pokemonInfo";
@@ -14,26 +13,23 @@ import { FlavorTextEntry, NameEntry, PokemonSpecies } from "../types/pokemonSpac
 
 const DetailPresentation:React.FC = () => {
     //クエリパラメーターの受け渡し
-    // const searchParams = useSearchParams();
-    // const id = searchParams.get("id"); // クエリパラメーターを取得
+    const searchParams = useSearchParams();
+    const id = searchParams.get("id"); // クエリパラメーターを取得
 
     //状態管理
     const [rightDisplayData,setRightDisplayData] = useState<detailDataProps[]>([]);
     const [leftDisplayData,setLeftDisplayData] = useState<detailDataProps[]>([]);
 
-//   const [pokeId,setPokeId] = useState<number>(dittoId);
+  const [pokeId,setPokeId] = useState<number>(dittoId);
   const [PokeCardData,setPokeCardData] = useState<PokemonCardData>({
     name:dittoJaName,
     description:dittoDescription,
     image:dittoImageUrl
   })
 
-  const pokemonData:Pokemon = useSelector((state:RootState) => state.pokemonData.pokemonInfo);
-  const pokemonSpecies:PokemonSpecies = useSelector((state:RootState) => state.pokemonData.pokemonSpacies);
-
   const createPokemonCardData = async ():Promise<void> => {
-    // const pokemonData:Pokemon = await getPokeData(pokeId);
-    // const pokemonSpecies:PokemonSpecies = await getPokemonSpecies(pokeId);
+    const pokemonData:Pokemon = await getPokeData(pokeId);
+    const pokemonSpecies:PokemonSpecies = await getPokemonSpecies(pokeId);
     const pokemonDescription = pokemonSpecies.flavor_text_entries.find((value:FlavorTextEntry)  => {
       const language = value.language.name;
       return language == "ja-Hrkt";
@@ -70,11 +66,11 @@ const DetailPresentation:React.FC = () => {
       createPokemonCardData();
     },[])
 
-    // useEffect(()=>{
-    //     if(!isNaN(Number(id))){
-    //         setPokeId(Number(id));
-    //     }
-    // },[id])
+    useEffect(()=>{
+        if(!isNaN(Number(id))){
+            setPokeId(Number(id));
+        }
+    },[id])
 
   return (
     <div>

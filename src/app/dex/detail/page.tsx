@@ -1,4 +1,3 @@
-'use client'
 import DetailPage from '@/feature/pokedex/pages/DetailPage';
 
 const page = () => {

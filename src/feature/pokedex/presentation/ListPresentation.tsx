@@ -3,18 +3,14 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Box, Button, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { getPokeData, getPokemonSpecies } from '../api/getPokeData';
 import { CardList } from '../component/CardList';
 import { dittoDescription, dittoImageUrl, dittoJaName } from '../constants/ditto';
-import { storePokemonData, storePokemonSpecies } from '../slices/pokeDataSlice';
 import { Pokemon } from '../types/pokemonInfo';
 import { PokemonCardData } from '../types/pokemonProps';
 import { FlavorTextEntry, NameEntry, PokemonSpecies } from '../types/pokemonSpacies';
 
 const ListPresentation = () => {
-  //reduxの関数を定義
-  const dispatch = useDispatch();
 
   const [pokeId,setPokeId] = useState<number>(1);
   const [PokeCardData,setPokeCardData] = useState<PokemonCardData>({
@@ -39,10 +35,6 @@ const ListPresentation = () => {
       description:pokemonDescription ? pokemonDescription.flavor_text :dittoDescription,
       image:pokemonData.sprites.front_default ? pokemonData.sprites.front_default : dittoImageUrl,
     }
-
-    //dispatchでstoreを更新
-    dispatch(storePokemonData(pokemonData));
-    dispatch(storePokemonSpecies(pokemonSpecies));
 
     setPokeCardData(result);
   }
